@@ -99,7 +99,8 @@ namespace Assets.Scripts.IAJ.Unity.Pathfinding
         //if the parameter returnPartialSolution is true, then the user wants to have a partial path to the best node so far even when the search has not finished searching
         public bool Search(out Path solution, bool returnPartialSolution = false)
         {
-            while (true)
+            int counter = 0;
+            while(true)
             {
                 if (Open.Count() == 0)
                 {
@@ -120,6 +121,14 @@ namespace Assets.Scripts.IAJ.Unity.Pathfinding
                 {
                     this.ProcessChildNode(bestNode, bestNode.node.EdgeOut(i));
                 }
+                if (counter >= NodesPerSearch)
+                {
+                    solution = CalculateSolution(bestNode, true);
+                    return false;
+                }
+                counter += 1;
+                TotalProcessedNodes += 1;
+                if (MaxOpenNodes <= Open.Count()) MaxOpenNodes = Open.Count(); 
             }
         }                 
 

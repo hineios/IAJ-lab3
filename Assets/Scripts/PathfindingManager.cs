@@ -8,6 +8,7 @@ using RAIN.Navigation.Graph;
 
 public class PathfindingManager : MonoBehaviour {
 
+    public static uint MAX_NODES_PROCESSED = 10;
 	//public fields to be set in Unity Editor
 	public GameObject startDebugSphere;
 	public GameObject endDebugSphere;
@@ -31,7 +32,10 @@ public class PathfindingManager : MonoBehaviour {
 		this.currentClickNumber = 1;
 		this.navMesh = NavigationManager.Instance.NavMeshGraphs [0];
 
-	    this.aStarPathFinding = new AStarPathfinding(this.navMesh, new SimpleUnorderedNodeList(), new SimpleUnorderedNodeList(), new ZeroHeuristic());
+        this.aStarPathFinding = new AStarPathfinding(this.navMesh, new SimpleUnorderedNodeList(), new SimpleUnorderedNodeList(), new ZeroHeuristic())
+        {
+            NodesPerSearch = MAX_NODES_PROCESSED
+        };
 	}
 	
 	// Update is called once per frame

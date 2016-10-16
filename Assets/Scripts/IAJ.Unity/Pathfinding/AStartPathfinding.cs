@@ -100,17 +100,22 @@ namespace Assets.Scripts.IAJ.Unity.Pathfinding
         public bool Search(out Path solution, bool returnPartialSolution = false)
         {
             int counter = 0;
+			float startTime = Time.realtimeSinceStartup;
             while(true)
             {
                 if (Open.Count() == 0)
                 {
                     solution = null;
+					TotalProcessingTime += Time.realtimeSinceStartup - startTime;
                     return true;
                 }
                 NodeRecord bestNode = Open.GetBestAndRemove();
                 if (bestNode.node.Equals(GoalNode))
                 {
                     solution = CalculateSolution(bestNode, false);
+					this.InProgress = false;
+					TotalProcessingTime += Time.realtimeSinceStartup - startTime;
+					CleanUp ();
                     return true;
                 }
                 Closed.Add(bestNode);
@@ -123,6 +128,7 @@ namespace Assets.Scripts.IAJ.Unity.Pathfinding
                 }
                 if (counter >= NodesPerSearch)
                 {
+					TotalProcessingTime += Time.realtimeSinceStartup - startTime;
                     solution = CalculateSolution(bestNode, true);
                     return false;
                 }

@@ -84,7 +84,8 @@ public class PathfindingManager : MonoBehaviour {
 	        var finished = this.aStarPathFinding.Search(out this.currentSolution);
 	        if (finished && this.currentSolution != null)
 	        {
-	            //here I would make a character follow the path   
+	            //here I would make a character follow the path
+
 	        }
 	    }
 	}

@@ -68,7 +68,28 @@ namespace Assets.Scripts.IAJ.Unity.Pathfinding.DataStructures
             //welcome to LINQ guys, for those of you that remember LISP from the AI course, the LINQ Aggregate method is the same as lisp's Reduce method
             //so here I'm just using a lambda that compares the first element with the second and returns the lowest
             //by applying this to the whole list, I'm returning the node with the lowest F value.
-            return this.NodeRecords.Aggregate((nodeRecord1, nodeRecord2) => nodeRecord1.fValue <= nodeRecord2.fValue ? nodeRecord1 : nodeRecord2);
+			return this.NodeRecords.Aggregate((nodeRecord1, nodeRecord2) => compareNode(nodeRecord1, nodeRecord2) ? nodeRecord1 : nodeRecord2);
         }
+
+		/**
+		*  Compares the nodes for with their f value,
+		*  if the f-value is the same it compares using
+		*  their h-value to see which one is lower.
+		*/
+		public bool compareNode(NodeRecord node1, NodeRecord node2)
+		{
+			bool result = false;
+			if (node1.fValue < node2.fValue)
+				result = true;
+			else {
+				if (node1.fValue == node2.fValue) {
+					if (node1.fValue == node2.fValue) {
+						if (node1.hValue < node2.hValue)
+							result = true;
+					}
+				}
+			}
+			return result;
+		}
     }
 }

@@ -107,6 +107,7 @@ namespace Assets.Scripts.IAJ.Unity.Pathfinding
                 {
                     solution = null;
 					TotalProcessingTime += Time.realtimeSinceStartup - startTime;
+					CleanUp ();
                     return true;
                 }
                 NodeRecord bestNode = Open.GetBestAndRemove();

@@ -32,7 +32,7 @@ public class PathfindingManager : MonoBehaviour {
 		this.currentClickNumber = 1;
 		this.navMesh = NavigationManager.Instance.NavMeshGraphs [0];
 
-        this.aStarPathFinding = new AStarPathfinding(this.navMesh, new SimpleUnorderedNodeList(), new SimpleUnorderedNodeList(), new ZeroHeuristic())
+		this.aStarPathFinding = new AStarPathfinding(this.navMesh, new SimpleUnorderedNodeList(), new SimpleUnorderedNodeList(), new EuclideanHeuristic())
         {
             NodesPerSearch = MAX_NODES_PROCESSED
         };
@@ -42,7 +42,6 @@ public class PathfindingManager : MonoBehaviour {
 	void Update () 
     {
 		Vector3 position;
-		NavigationGraphNode node;
 
 		if (Input.GetMouseButtonDown(0)) 
 		{

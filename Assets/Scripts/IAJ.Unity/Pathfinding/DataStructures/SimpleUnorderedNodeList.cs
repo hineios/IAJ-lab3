@@ -76,7 +76,7 @@ namespace Assets.Scripts.IAJ.Unity.Pathfinding.DataStructures
 		*  if the f-value is the same it compares using
 		*  their h-value to see which one is lower.
 		*/
-		public bool compareNode(NodeRecord node1, NodeRecord node2)
+		private bool compareNode(NodeRecord node1, NodeRecord node2)
 		{
 			bool result = false;
 			if (node1.fValue < node2.fValue)
